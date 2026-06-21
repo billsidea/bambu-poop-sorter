@@ -27,10 +27,10 @@ def getLogLevel(text_level):
 
 # load all config settings from toml file
 try:
-    with open("P2S_Poop_Sorter.toml", mode="rb") as fp:
+    with open("Bambu_Poop_Sorter.toml", mode="rb") as fp:
         config = tomllib.load(fp)
 except FileNotFoundError as e:
-    e.add_note("ServoSorter could not find or open the necessary 'P2S_Poop_Sorter.toml' file")
+    e.add_note("Could not find or open the necessary 'Bambu_Poop_Sorter.toml' file")
     raise
 
 log_and_sorter_name_prefix = "3d_printing_poop_sorter_bambu_" + config["printer_api"]["machine_serial"]

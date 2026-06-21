@@ -1,0 +1,26 @@
+[printer_api]
+machine_access_code = "12345678"
+machine_ip_address = "192.168.1.111"
+machine_local_user = "bblp"
+machine_serial = "123456789012345"
+
+[pca9685_servo_driver]
+# a driver's address can be changed by soldering jumpers on the pca9685 board
+servo_driver_i2c_addresses = [0x40]
+                              
+[servo_details]
+actuation = [[90, 90, 90, 90, 90, 90, 90]]
+angle_alt = [[50, 50, 50, 50, 50, 50, 50]]
+angle_main = [[20,  20, 20, 20, 20, 20, 20]]
+only_move_necessary_servos = true # toml requires this to be all lowercase: true or false
+servo_count = 7
+sleep_duration_between_servo_movements = 0.25 # toml requires a leading digit (even if zero) before the decimal
+
+[sorter_settings]
+bin_mode = 1 # 1 = persistent; 2 = dynamic per print
+cooling_fan_speed_threshold = 12
+separation_mode = 1 # 1 = approximate; 2 = strict ; 3 = very strict
+
+[logging]
+console_log_level = "INFO"
+file_log_level = "INFO"
