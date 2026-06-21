@@ -121,6 +121,8 @@ Please refer to the [Other Requirements](https://github.com/billsidea/servo-sort
 
 Refer to [this model](https://makerworld.com/en/models/2916655-automated-servo-sorting-device-with-free-software#profileId-3262695) on Maker World. This is what's shown in the above pictures/video (as well as the pictures/video in my referenced servo-sorter package).
 
+The 3D-printed parts fit together with very tight tolerances. It can be difficult to slide the pieces into each other. This was all done with the goal of having a very smooth/flat surface so that the printer poops have nothing to catch on.
+
 # Future Plans
 
 The following are being considered for future enhancements:
