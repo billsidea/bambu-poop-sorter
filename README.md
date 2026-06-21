@@ -1,3 +1,4 @@
+
 **bambu-poop-sorter** is a utility that provides automated poop sorting for certain Bambu Lab 3D printers (tested successfully on P2S).
 
 - [Overview](#overview)
@@ -11,12 +12,13 @@
 - [Additional Information](#additional-information)
 
 # Overview
+<img width="420" height="500" alt="SortingMachineSmaller" src="https://github.com/user-attachments/assets/bcdad0a0-48b8-41dd-a8f3-0285a74538b7" />
 
 I wanted to create something that would help proactively sort poop that is ejected from my Bambu Lab P2S 3D printer. My main driving need was to separate by type (eg. PLA, ABS, PETG, etc.), but I also wanted to create more robust logic to separate by color. I'm intrigued by potential upcoming filament recycling solutions (such as the [Creality Filament Maker M1 & Shredder R1](https://www.indiegogo.com/en/projects/creality/creality-filament-maker-m1--shredder-r1) and [loop](https://makewithloop.com/)) and wondered if sorting poop would help set the stage for success with these devices.
 
 The good news is that the Bambu Lab P2S spits out all kinds of useful data via [mqtt](https://mqtt.org/) messages. It is this data that Bambu Studio uses to monitor print status, show printer telemetry data (e.g. bed temperature, nozzle temperature, etc.), and help manage filament that is loaded into your Bambu Lab AMS unit(s). More good news is that no printer settings need to be changed to consume this data.
 
-**bambu-poop-sorter** is my solution. Along with some 3D-printed parts and some micro servos, it provides a basic mechanism to sort printer poop.
+**bambu-poop-sorter** is my solution. Along with some 3D-printed parts and some micro servos, it provides a basic mechanism to sort printer poop. In the video above, you can see a printer poop falling into a bin and then the machine changing its configuration to prepare for the next (differently colored) poop.
 
 # Installation
 
