@@ -3,7 +3,7 @@ requires = ["uv_build>=0.11.18,<0.12"]
 build-backend = "uv_build"
 
 [project]
-name = "package_name"
+name = "bambu_poop_sorter"
 version = "0.0.1"
 dependencies = [
     "servo-sorter>=0.0.5",
