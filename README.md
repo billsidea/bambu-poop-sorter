@@ -4,6 +4,7 @@
 - [Overview](#overview)
 - [Installation](#installation)
 - [Configuration](#configuration)
+- [Running bambu-poop-sorter](#running-bambu-poop-sorter)
 - [Software Dependencies](#software-dependencies)
 - [Hardware Requirements](#hardware-requirements)
 - [Other Requirements](#other-requirements)
@@ -99,6 +100,12 @@ file_log_level = "INFO"
 ```
 Valid log levels are "DEBUG", "INFO", "WARNING", and "ERROR". It is recommended to leave the defaults ("INFO") unless you are having a problem, in which case "DEBUG" can be used (and which will spit out tons of information to the logs). The application log will be generated with the name "3d_printing_poop_sorter_bambu_[machine serial number].log". The content going into that log is controlled with the "file_log_level" setting. When running the application in an interactive mode (e.g. using a Python IDE like Thonny), you will see console level log entries which can be controlled with the "console_log_level" setting.
 
+# Running bambu-poop-sorter
+
+When first attempting to run **bambu-poop-sorter**, I recommend just opening up the "pseries_poop_sorter.py" file in a Python IDE (e.g. Thonny on a Raspberry Pi) and running it from there. Note that you will need to configure a tool like Thonny to point to the virtual Python environment where you've installed **bambu-poop-sorter**. Specifically for Thonny, this can be done via the "Configure Interpreter" settings.
+
+If you would like to run this process as a Linux service, the file you need to run is "pseries_poop_sorter.py". Lots of details about running a Python module as a service can be found online. Google ["running a python script as a service using a virtual python environment"](https://share.google/EqJqBMZT9OkQj2t2C) and it provides great guidance.
+
 # Software Dependencies
 
 All dependencies listed below will be installed automatically as part of installing the **bambu-poop-sorter** package. You do NOT need to install these separately, but I wanted to point you to related documentation.
@@ -139,11 +146,7 @@ The total number of bins available to the process will always equal the number o
 
 Current bin assignments can be seen in the file named "3d_printing_poop_sorter_bambu_[machine serial number]_servosorter_db.json". Do not manually change the values in this file. Removing a filament from your AMS will automatically remove a bin assignment for that filament. If you wish to clear all bin assignments, stop the **bambu-poop-sorter** process and delete the aforementioned file. It will get regenerated automatically when the process starts back up.
 
-When first attempting to run **bambu-poop-sorter**, I recommend just opening up the "pseries_poop_sorter.py" file in a Python IDE (e.g. Thonny on a Raspberry Pi) and running it from there. Note that you will need to configure a tool like Thonny to point to the virtual Python environment where you've installed **bambu-poop-sorter**. Specifically for Thonny, this can be done via the "Configure Interpreter" settings.
-
 When **bambu-poop-sorter** first starts up, you will see that the servos will be configured to point to bin 1 ("DEFAULT") and then they will adjust from there as the print progresses and the filaments change.
-
-If you would like to run this process as a Linux service, the file you need to run is "pseries_poop_sorter.py". Lots of details about running a Python module as a service can be found online. Google "running a python script as a service using a virtual python environment" and it provides great guidance.
 
 This logic has been tested up to the limits of my environment. This includes a Bambu Lab P2S with two AMS 2 Pro units attached and 2 AMS H/T units attached. If anyone has the "full compliment" of AMS units (i.e. 4 AMS 2 Pro, 4 AMS H/T) and would like to help me support all of those, please reach out via the [Discussions area of this project](https://github.com/billsidea/bambu-poop-sorter/discussions). There are some things I need to see about how those additional AMS units are enumerated in the mqtt messages.
 
