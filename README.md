@@ -150,7 +150,7 @@ When **bambu-poop-sorter** first starts up, you will see that the servos will be
 
 This logic has been tested up to the limits of my environment. This includes a Bambu Lab P2S with two AMS 2 Pro units attached and 2 AMS H/T units attached. If anyone has the "full compliment" of AMS units (i.e. 4 AMS 2 Pro, 4 AMS H/T) and would like to help me support all of those, please reach out via the [Discussions area of this project](https://github.com/billsidea/bambu-poop-sorter/discussions). There are some things I need to see about how those additional AMS units are enumerated in the mqtt messages.
 
-All development and testing was done on a Bambu Lab P2S. I suspect it will work on a P1S and also all the "fancier" machines. I know for a fact that it wilL definitely NOT run on the A1 series (I have an A1 Mini and the mqtt output from that machine is completely different).
+All development and testing was done on a Bambu Lab P2S. I suspect it will work on a P1S and also all the "fancier" Bambu Lab machines. I know for a fact that it will definitely NOT run on the A1 series (I have an A1 Mini and the mqtt output from that machine is completely different).
 
 I'd be open to developing similar functionality for other models (even other printer brands), but I am limited by the printers I have available to me. Please reach out via [Discussions](https://github.com/billsidea/bambu-poop-sorter/discussions) if you'd like to collaborate on support for other printers.
 
