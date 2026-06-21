@@ -72,7 +72,10 @@ servo_count = 7
 sleep_duration_between_servo_movements = 0.25 # toml requires a leading digit (even if zero) before the decimal
 ```
 The example above assumes you have seven servos (all attached to a single driver) and that all servos have an actuation range of 90 degrees. The "alt" and "main" angles will need to be determined via calibration. At present I do not have any automated calibration tools to offer, but you can follow the guidance in the [Other Requirements](https://github.com/billsidea/servo-sorter#other-requirements) section of servo-sorter's documentation to determine these values. You are looking for the angles that make the arms lined up like the pictures below:
-<img width="2233" height="2260" alt="Main" src="https://github.com/user-attachments/assets/6ed1ea37-b928-429e-aaa6-1f37c1d1f43d" /><img width="2875" height="2532" alt="Alt" src="https://github.com/user-attachments/assets/79a6c1ea-93ca-4cb5-bdfb-c80c0b273c96" />
+
+"MAIN"<img width="2233" height="2260" alt="Main" src="https://github.com/user-attachments/assets/6ed1ea37-b928-429e-aaa6-1f37c1d1f43d" />
+
+"ALT"<img width="2875" height="2532" alt="Alt" src="https://github.com/user-attachments/assets/79a6c1ea-93ca-4cb5-bdfb-c80c0b273c96" />
 
 ```python
 [sorter_settings]
