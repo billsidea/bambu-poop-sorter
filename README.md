@@ -1,5 +1,5 @@
 
-**bambu-poop-sorter** is a utility that provides automated poop sorting for certain Bambu Lab 3D printers (tested successfully on P2S).
+**bambu-poop-sorter** is a utility that provides automated poop sorting for certain Bambu Lab 3D printers (tested successfully on a P2S).
 
 - [Overview](#overview)
 - [Installation](#installation)
