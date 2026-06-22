@@ -47,7 +47,11 @@ The good news is that the Bambu Lab P2S spits out all kinds of useful data via [
 
 I highly recommend reading through the [Hardware Requirements](https://github.com/billsidea/servo-sorter#hardware-requirements) and [Other Requirements](https://github.com/billsidea/servo-sorter#other-requirements) sections of the servo-sorter package which is used by (and installed automatically by) **bambu-poop-sorter**. This will give you details you need to know about assembling the hardware necessary.
 
-After installing the **bambu-poop-sorter** package, you will need to make some updates to the **Bambu_Poop_Sorter.toml** file that you will find in the project's src folder. Let's review section by section:
+After following the installation steps described above for the **bambu-poop-sorter** package, run the following command from your **(.venv) $** prompt (i.e. the virtual environment where you've installed **bambu-poop-sorter**):
+```bash
+python3 -m bambu_poop_sorter.pseries_poop_sorter
+```
+This will generate an error, but it will initialize the necessary **Bambu_Poop_Sorter.toml** file in your **~/.config/bambu_poop_sorter** folder. You will need to update this file. Let's review the necessary updates section by section:
 
 ```python
 [printer_api]
@@ -98,13 +102,15 @@ These settings control how **bambu-poop-sorter** behaves. I recommend leaving th
 console_log_level = "INFO"
 file_log_level = "INFO"
 ```
-Valid log levels are "DEBUG", "INFO", "WARNING", and "ERROR". It is recommended to leave the defaults ("INFO") unless you are having a problem, in which case "DEBUG" can be used (and which will spit out tons of information to the logs). The application log will be generated with the name "3d_printing_poop_sorter_bambu_[machine serial number].log". The content going into that log is controlled with the "file_log_level" setting. When running the application in an interactive mode (e.g. using a Python IDE like Thonny), you will see console level log entries which can be controlled with the "console_log_level" setting.
+Valid log levels are "DEBUG", "INFO", "WARNING", and "ERROR". It is recommended to leave the defaults ("INFO") unless you are having a problem, in which case "DEBUG" can be used (and which will spit out tons of information to the logs). The application log will be generated with the name "3d_printing_poop_sorter_bambu_[machine serial number].log" and be placed in your **~/.local/state/bambu_poop_sorter/log** folder. The content going into that log is controlled with the "file_log_level" setting. When running the application in an interactive mode (e.g. using a Python IDE like Thonny), you will see console level log entries which can be controlled with the "console_log_level" setting.
 
 # Running bambu-poop-sorter
 
-When first attempting to run **bambu-poop-sorter**, I recommend just opening up the "pseries_poop_sorter.py" file in a Python IDE (e.g. Thonny on a Raspberry Pi) and running it from there. Note that you will need to configure a tool like Thonny to point to the virtual Python environment where you've installed **bambu-poop-sorter**. Specifically for Thonny, this can be done via the "Configure Interpreter" settings.
-
-If you would like to run this process as a Linux service, the file you need to run is "pseries_poop_sorter.py". Lots of details about running a Python module as a service can be found online. Google ["running a python script as a service using a virtual python environment"](https://share.google/EqJqBMZT9OkQj2t2C) and it provides great guidance.
+Once you've made the updates described above, you can run **bambu-poop-sorter** by running the following command from your **(.venv) $** prompt (i.e. the virtual environment where you've installed **bambu-poop-sorter**):
+```bash
+python3 -m bambu_poop_sorter.pseries_poop_sorter
+```
+If you would like to run this process as a Linux service, the file you need to run is "pseries_poop_sorter.py". Lots of details about running a Python module as a service can be found online. Google ["running a python script as a service using a virtual python environment"](https://share.google/EqJqBMZT9OkQj2t2C) and it provides great guidance. I recommend running as a "User Service" (rather than a "System Service"). Having it run under a single user identity is also consistent with how the toml and log files are handled (i.e. at the user level).
 
 # Software Dependencies
 
