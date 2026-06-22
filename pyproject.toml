@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "bambu_poop_sorter"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
     "servo-sorter>=0.0.5",
     "paho-mqtt>=2.1.0",
