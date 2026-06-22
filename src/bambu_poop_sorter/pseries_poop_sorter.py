@@ -9,6 +9,10 @@ from logging.handlers import RotatingFileHandler
 import sys
 import servo_sorter
 import tomllib
+import platformdirs
+from pathlib import Path
+import shutil
+import importlib.resources
 
 # log level translation from values in toml file
 def getLogLevel(text_level):
@@ -26,11 +30,24 @@ def getLogLevel(text_level):
     return log_level
 
 # load all config settings from toml file
+# use template config to create real config in user config directory if it doesn't already exist
+PACKAGE_NAME = "bambu_poop_sorter"
+CONFIG_FILE_NAME = "Bambu_Poop_Sorter.toml"
+user_config_path = Path(platformdirs.user_config_dir(PACKAGE_NAME)) / CONFIG_FILE_NAME
+if not user_config_path.exists():
+    user_config_path.parent.mkdir(parents=True, exist_ok=True)
+    template_config_path = importlib.resources.files(PACKAGE_NAME).joinpath("Bambu_Poop_Sorter.template.toml")
+    with template_config_path.open("rb") as f_in, open(user_config_path, "wb") as f_out:
+        shutil.copyfileobj(f_in, f_out)
+
 try:
-    with open("Bambu_Poop_Sorter.toml", mode="rb") as fp:
+    with open(user_config_path, mode="rb") as fp:
         config = tomllib.load(fp)
+        if(config["printer_api"]["machine_access_code"] == "12345678" or config["printer_api"]["machine_serial"] == "123456789012345"):
+            # the necessary user config file exists but does not appear to have been updated from the template
+            raise ValueError(f"The 'Bambu_Poop_Sorter.toml file has been created and was found at {user_config_path}, but it still needs to be configured.")
 except FileNotFoundError as e:
-    e.add_note("Could not find or open the necessary 'Bambu_Poop_Sorter.toml' file")
+    e.add_note(f"Could not find or open the necessary 'Bambu_Poop_Sorter.toml' file at {user_config_path}")
     raise
 
 log_and_sorter_name_prefix = "3d_printing_poop_sorter_bambu_" + config["printer_api"]["machine_serial"]
@@ -48,8 +65,10 @@ servosorter_logger.setLevel(overall_log_level_val)
 console_handler = logging.StreamHandler(sys.stdout) # adding sys.stdout argument makes text show in black rather than red in console
 console_handler.setLevel(console_log_level_val)
 # file handler for text file output
+log_file_name = log_and_sorter_name_prefix + ".log"
+user_log_path = Path(platformdirs.user_log_path(PACKAGE_NAME)) / log_file_name
 file_handler = RotatingFileHandler(
-    log_and_sorter_name_prefix + '.log',
+    user_log_path,
     encoding='utf-8',
     mode='a',
     maxBytes=10 * 1024 * 1024, # 10 MB
