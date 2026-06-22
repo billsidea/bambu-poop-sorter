@@ -67,6 +67,8 @@ console_handler.setLevel(console_log_level_val)
 # file handler for text file output
 log_file_name = log_and_sorter_name_prefix + ".log"
 user_log_path = Path(platformdirs.user_log_path(PACKAGE_NAME)) / log_file_name
+if not user_log_path.exists():
+    user_log_path.parent.mkdir(parents=True, exist_ok=True)
 file_handler = RotatingFileHandler(
     user_log_path,
     encoding='utf-8',
