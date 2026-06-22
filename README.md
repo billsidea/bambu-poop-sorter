@@ -120,7 +120,9 @@ All dependencies listed below will be installed automatically as part of install
   
 - **paho-mqtt** - This is a package that provides the [mqtt](https://mqtt.org/) functionality that allows **bambu-poop-sorter** to consume data from the printer. Details can be found [here](https://github.com/eclipse-paho/paho.mqtt.python).
   
-- **webcolors** - Although not yet used to provide end-user functionality in **bambu-poop-sorter**, I am planning to use it to provide additional sorting capabilities in the future. Details can be found [here](https://webcolors.readthedocs.io/en/stable/).
+- **webcolors** - Although not yet used to provide end-user functionality in **bambu-poop-sorter**, I am planning to use it to provide additional sorting capabilities in the future. Details can be found [here](https://webcolors.readthedocs.io/en/stable/) and [here](https://github.com/ubernostrum/webcolors).
+  
+- **platformdirs** - This is used for determining the proper locations for certain config and log files based on your OS. Details can be found [here](https://platformdirs.readthedocs.io/en/latest/) and [here](https://github.com/tox-dev/platformdirs).
 
 # Hardware Requirements
 
@@ -150,13 +152,15 @@ Bin 1 is designated as a "DEFAULT" bin. You can think of it as a garbage bin. Th
 
 The total number of bins available to the process will always equal the number of servos being used + 1. So, for example, if you are using 7 servos, there will be 8 bins available.
 
-Current bin assignments can be seen in the file named "3d_printing_poop_sorter_bambu_[machine serial number]_servosorter_db.json". Do not manually change the values in this file. Removing a filament from your AMS will automatically remove a bin assignment for that filament. If you wish to clear all bin assignments, stop the **bambu-poop-sorter** process and delete the aforementioned file. It will get regenerated automatically when the process starts back up.
+Current bin assignments can be seen in the file named "3d_printing_poop_sorter_bambu_[machine serial number]_servosorter_db.json" (in your **~/.config/bambu_poop_sorter** folder). Do not manually change the values in this file while the process is running. Removing a filament from your AMS will automatically remove a bin assignment for that filament. If you wish to clear all bin assignments, stop the **bambu-poop-sorter** process and delete the aforementioned file. It will get regenerated automatically when the process starts back up.
+
+You will also see a **poopDB** file in your **~/.config/bambu_poop_sorter** folder. This is a shelve file used internally to keep track of the filaments loaded into your AMS slots. Depending on your OS and Python version, you may also see other files named **poopDB** with different extensions (e.g. .bak, .db, .dir, .dat). In the event that **bambu-poop-sorter** is having problems and you want a "clean slate", these files can be deleted (while the **bambu-poop-sorter** process is stopped) and they will get regenerated when you start the process back up, but that really should not ever be necessary.
 
 When **bambu-poop-sorter** first starts up, you will see that the servos will be configured to point to bin 1 ("DEFAULT") and then they will adjust from there as the print progresses and the filaments change.
 
-This logic has been tested up to the limits of my environment. This includes a Bambu Lab P2S with two AMS 2 Pro units attached and 2 AMS H/T units attached. If anyone has the "full compliment" of AMS units (i.e. 4 AMS 2 Pro, 4 AMS H/T) and would like to help me support all of those, please reach out via the [Discussions area of this project](https://github.com/billsidea/bambu-poop-sorter/discussions). There are some things I need to see about how those additional AMS units are enumerated in the mqtt messages.
+This logic has been tested up to the limits of my environment. This includes a Bambu Lab P2S with two AMS 2 Pro units attached and 2 AMS H/T units attached. If anyone has the "full compliment" of AMS units (i.e. 4 AMS 2 Pro, 4 AMS H/T) and would like to help me support all of those, please reach out via the [Discussions area of this project](https://github.com/billsidea/bambu-poop-sorter/discussions). There are some things I need to see about how those additional AMS units are enumerated in the mqtt messages. It is pretty straightforward to collect samples of this data in your environment using a tool like [Postman](https://www.postman.com/).
 
-All development and testing was done on a Bambu Lab P2S. I suspect it will work on a P1S and also all the "fancier" Bambu Lab machines. I know for a fact that it will definitely NOT run on the A1 series (I have an A1 Mini and the mqtt output from that machine is completely different).
+All development and testing was done on a Bambu Lab P2S. I suspect it will work on a P1S and also all the higher-end Bambu Lab machines. However, I know for a fact that it will definitely NOT run on the A1 series (I have an A1 Mini and the mqtt output from that machine is completely different). If you're up for some experimentation and trying it on the higher-end Bambu Lab machines, please let me know via [Discussions](https://github.com/billsidea/bambu-poop-sorter/discussions) how it goes.
 
 I'd be open to developing similar functionality for other models (even other printer brands), but I am limited by the printers I have available to me. Please reach out via [Discussions](https://github.com/billsidea/bambu-poop-sorter/discussions) if you'd like to collaborate on support for other printers.
 
