@@ -102,7 +102,7 @@ These settings control how **bambu-poop-sorter** behaves. I recommend leaving th
 console_log_level = "INFO"
 file_log_level = "INFO"
 ```
-Valid log levels are "DEBUG", "INFO", "WARNING", and "ERROR". It is recommended to leave the defaults ("INFO") unless you are having a problem, in which case "DEBUG" can be used (and which will spit out tons of information to the logs). The application log will be generated with the name "3d_printing_poop_sorter_bambu_[machine serial number].log" and be placed in your **~/.local/state/bambu_poop_sorter/log** folder. The content going into that log is controlled with the "file_log_level" setting. When running the application in an interactive mode (e.g. using a Python IDE like Thonny), you will see console level log entries which can be controlled with the "console_log_level" setting.
+Valid log levels are "DEBUG", "INFO", "WARNING", and "ERROR". It is recommended to leave the defaults ("INFO") unless you are having a problem, in which case "DEBUG" can be used (and which will spit out tons of information to the logs). The application log will be generated with the name "3d_printing_poop_sorter_bambu_[machine serial number].log" and be placed in your **~/.local/state/bambu_poop_sorter/log** folder. The content going into that log is controlled with the "file_log_level" setting. When running the application in an interactive mode (e.g. from the command line), you will see console level log entries which can be controlled with the "console_log_level" setting.
 
 # Running bambu-poop-sorter
 
