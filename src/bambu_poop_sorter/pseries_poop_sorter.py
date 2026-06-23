@@ -88,6 +88,9 @@ servosorter_logger.addHandler(file_handler)
 logger.info("Loggers initialized")
 
 shelf_name = "poopDB"
+shelf_path = Path(platformdirs.user_config_dir(PACKAGE_NAME)) / shelf_name
+if not shelf_path.exists():
+    shelf_path.parent.mkdir(parents=True, exist_ok=True)
 
 unknown_filament_slot_numbers = [65535, 255]
 
@@ -130,7 +133,7 @@ def on_message(client, userdata, msg):
             # clear out bin assignments via index_filament call
             index_filament(data, True)
             task_id = data["print"]["task_id"]
-            with shelve.open(shelf_name, writeback=True) as poopDB:
+            with shelve.open(shelf_path, writeback=True) as poopDB:
                 poopDB["current_task_id"] = task_id
                 poopDB.sync()
         else:
@@ -234,7 +237,7 @@ def on_message(client, userdata, msg):
 
 def index_filament(data, clear_bins=False):
     global cross_print_current_slot
-    with shelve.open(shelf_name, writeback=True) as poopDB:
+    with shelve.open(shelf_path, writeback=True) as poopDB:
         #if("bins" not in poopDB or clear_bins == True):
         if(clear_bins == True):
             sorter.reset_all_bins()
@@ -345,7 +348,7 @@ def move_servos(force_default_mode=True, prev_slot=None, new_slot=None, poop_num
     connected_servos = config["servo_details"]["servo_count"]
     sort_attribute = ""
     
-    with shelve.open(shelf_name, writeback=True) as poopDB:
+    with shelve.open(shelf_path, writeback=True) as poopDB:
         if(force_default_mode == True or new_slot in unknown_filament_slot_numbers or prev_slot in unknown_filament_slot_numbers or
            "slot_" + str(new_slot) not in poopDB or "slot_" + str(prev_slot) not in poopDB):
             sort_attribute = "DEFAULT"
@@ -376,7 +379,7 @@ def move_servos(force_default_mode=True, prev_slot=None, new_slot=None, poop_num
 # mainline
 
 #initialize shelf
-with shelve.open(shelf_name, writeback=True) as initPoopDB:
+with shelve.open(shelf_path, writeback=True) as initPoopDB:
     logger.info("App DB located in: %s", os.getcwd())
     # current task id may be necessary depending on what mode we're in
     if("current_task_id" in initPoopDB):
