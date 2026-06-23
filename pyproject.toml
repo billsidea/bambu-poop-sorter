@@ -4,9 +4,9 @@ build-backend = "uv_build"
 
 [project]
 name = "bambu_poop_sorter"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = [
-    "servo-sorter>=0.0.6",
+    "servo-sorter>=0.0.7",
     "paho-mqtt>=2.1.0",
     "webcolors>=25.10.0",
     "platformdirs>=4.10.0",
